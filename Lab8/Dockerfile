@@ -1,7 +1,8 @@
 FROM python:3.12-alpine
 
 WORKDIR /usr/src/app
-COPY . .
+
+COPY WebSite .
 
 RUN pip install django gunicorn whitenoise psycopg2-binary gevent
 
