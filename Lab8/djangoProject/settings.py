@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-56xu6*!&_7wwdy9+d70_-s!-m^ll76^=k2i(nu74d_hht-!^b_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "Store.apps.StoreConfig",
     "whitenoise.runserver_nostatic",
+    "django.contrib.postgres",
 ]
 
 MIDDLEWARE = [
@@ -79,8 +80,12 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'NAME': os.getenv('POSTGRES_DB')
     }
 }
 
